@@ -1,0 +1,7 @@
+table,tr{border:2px solid #c1c1c1;}
+td{align:right; border:2px solid #c1c1c1;width:50%;background-color:rgb(50,0,250);}
+td.a{background-color:rgb(10,40,250);height:400px}
+td.o{background-color:rgb(0,250,0);}
+td.r{background-color:rgb(240,240,0);}
+td.d{background-color:rgb(250,0,0);}
+img.c{text-align:center;margin-bottom:10px;display:table-cell;vertical-align:bottom;}

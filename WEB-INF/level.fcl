@@ -1,0 +1,49 @@
+FUNCTION_BLOCK tankstate
+VAR_INPUT//Define Input
+        level_one:REAL;
+	level_two:REAL;
+	level_three:REAL;
+END_VAR
+
+VAR_OUTPUT//Define Output
+	status:REAL;
+END_VAR
+
+//fuzzify Input
+FUZZIFY level_one
+	TERM lohigh:=(0,1)(4,0);
+	TERM lomid:=(2,0)(4,1)(5,1)(9,0);
+	TERM lolow:=(6,0)(9,1);
+END_FUZZIFY
+
+FUZZIFY level_two
+        TERM lthigh:=(0,1)(4,0);
+        TERM ltmid:=(2,0)(4,1)(5,1)(9,0);
+        TERM ltlow:=(6,0)(9,1);
+END_FUZZIFY
+
+FUZZIFY level_three
+        TERM lthhigh:=(0,1)(4,0);
+        TERM lthmid:=(2,0)(4,1)(5,1)(9,0);
+        TERM lthlow:=(6,0)(9,1);
+END_FUZZIFY
+
+//Defuzzify output status
+DEFUZZIFY status
+	TERM danger:=(0,0)(5,1)(10,0);
+	TERM risk:=(10,0)(15,1)(20,0);
+	TERM ok:=(20,0)(25,1)(30,0);
+	METHOD:COG;//use Default Center of Gravity
+	DEFAULT:=0;//if no rule apply
+END_DEFUZZIFY
+
+//Inference Rules
+RULEBLOCK no_1
+	AND:MIN;
+	ACT:MIN;
+	ACCU:MAX;
+	RULE 1:IF level_one IS lohigh AND level_two IS lthigh AND level_three IS lthhigh THEN status danger;
+	RULE 2:IF level_one IS lolow OR level_two IS lthigh AND level_three IS lthhigh THEN status risk; 
+	RULE 3:IF level_one IS lolow AND level_two IS ltlow AND level_three IS lthlow THEN status ok;
+END_RULEBLOCK
+END_FUNCTION_BLOCK

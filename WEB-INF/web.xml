@@ -1,0 +1,44 @@
+<!DOCTYPE web-app 
+
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN" 
+
+    "http://java.sun.com/j2ee/dtds/web-app_2_2.dtd">
+
+
+
+<web-app>
+
+
+
+    <display-name>myServletWAR, a first Web Application</display-name>
+
+    <description>
+
+	This is the intelligent tank.
+
+    </description>
+
+
+
+    <servlet>
+
+        <servlet-name>mytank</servlet-name>
+
+        <servlet-class>Itank</servlet-class>
+
+    </servlet>
+
+
+
+    <servlet-mapping>
+
+        <servlet-name>mytank</servlet-name>
+
+        <url-pattern>/tank</url-pattern>
+
+    </servlet-mapping>
+
+
+
+</web-app>
+
